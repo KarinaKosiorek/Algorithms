@@ -15,7 +15,9 @@ public class TreeTest {
     TreeNode t6 = new TreeNode(6);
     TreeNode t7 = new TreeNode(7);
     TreeNode t8 = new TreeNode(7);
-    TreeNode t9 = new TreeNode(1);
+    TreeNode t9 = new TreeNode(89);
+    TreeNode t10 = new TreeNode(80);
+    TreeNode t11 = new TreeNode(14);
 
     t1.setLeftTree(t2);
     t1.setRightTree(t3);
@@ -25,6 +27,8 @@ public class TreeTest {
     t6.setLeftTree(t7);
     t4.setLeftTree(t8);
     t6.setRightTree(t9);
+    t9.setRightTree(t10);
+    t10.setRightTree(t11);
 
     TreeAlgorithms ttc = new TreeAlgorithms();
     ttc.getMaxTotalDistinctValuesOnPaths(t1);

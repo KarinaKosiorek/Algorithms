@@ -1,39 +1,32 @@
 package main;
 
-import java.util.Arrays;
-import java.util.HashSet;
-
 public class TreeAlgorithms {
 
   int maxTotalDistinctValuesOnPaths = 0;
+  final int N = 50000;
+  int tab[] = new int[N];
+  int totalDistinctValuesOnPaths = 0;
 
   public int getMaxTotalDistinctValuesOnPaths(TreeNode root) {
-    if (root != null) {
-      HashSet<Integer> currentSet = new HashSet<Integer>();
-      preorder(root, currentSet);
-    }
+    preorder(root);
     return maxTotalDistinctValuesOnPaths;
   }
 
-  public void preorder(TreeNode root, HashSet<Integer> currentSet) {
+  public void preorder(TreeNode root) {
     if (root != null) {
-      currentSet.add(root.x);
-      System.out.println(root.x);
-
-      if (root.left == null && root.right == null) {
-        if (currentSet.size() > maxTotalDistinctValuesOnPaths) {
-          maxTotalDistinctValuesOnPaths = currentSet.size();
+      tab[root.x]++;
+      if (tab[root.x] == 1) {
+        totalDistinctValuesOnPaths++;
+        if (totalDistinctValuesOnPaths > maxTotalDistinctValuesOnPaths) {
+          maxTotalDistinctValuesOnPaths = totalDistinctValuesOnPaths;
         }
-        System.out.println("Distinct values on path: " + Arrays.toString(currentSet.toArray()));
       }
-
-      HashSet<Integer> hashSetLeft = new HashSet<Integer>();
-      hashSetLeft.addAll(currentSet);
-      preorder(root.left, hashSetLeft);
-
-      HashSet<Integer> hashSetRight = new HashSet<Integer>();
-      hashSetRight.addAll(currentSet);
-      preorder(root.right, hashSetRight);
+      preorder(root.left);
+      preorder(root.right);
+      tab[root.x]--;
+      if (tab[root.x] == 0) {
+        totalDistinctValuesOnPaths--;
+      }
     }
   }
 
